@@ -18,20 +18,31 @@ import composemphelloworld.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    batteryManager: BatteryManager
+) {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            val batteryLevel = remember { mutableStateOf(batteryManager.getBatteryLevel()) }
+            Text(
+                text = "The current battery level is ${batteryLevel.value}"
+            )
         }
+//        var showContent by remember { mutableStateOf(false) }
+//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//            Button(onClick = { showContent = !showContent }) {
+//                Text("Click me!")
+//            }
+//            AnimatedVisibility(showContent) {
+//                val greeting = remember { Greeting().greet() }
+//                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+//                    Text("Compose: $greeting")
+//                }
+//            }
+//        }
     }
 }

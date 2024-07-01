@@ -1,6 +1,7 @@
 package org.example.composeemptysample
 
 import App
+import BatteryManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,13 +13,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App()
+            App(
+                batteryManager = BatteryManager(applicationContext)
+            )
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }
